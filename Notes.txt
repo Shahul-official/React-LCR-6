@@ -1,0 +1,62 @@
+Dependency Array:
+
+🎯 What Dependency Array REALLY Does
+
+Dependency Array	When useEffect runs
+
+[]	Only once (on first mount)
+[count]	On first mount + every time count changes
+[Too]	Runs every time Too changes (⚠️ dangerous here)
+❌ No array	Runs on every render (infinite loop risk).
+
+
+🎯 Important Clarity
+
+You are not directly calling the API because useState changed.
+
+You are calling the API because:
+
+🔁 A state that is listed in the dependency array changed
+
+That’s the key rule.
+
+===========================================================================
+
+
+
+const [count,setCount] = useState(0) // when state  change Useeffect runs.. eg  
+
+const [Too,SetTOo] = useState( [] )
+
+useEffect( ()=> {
+
+    let API = ("https://jsonplaceholder.typicode.com/todos")
+    
+    fetch(API)
+    .then((resp) => { return resp.json()})
+    .then ( data => { SetTOo (data)} )
+    .catch( err => { console.log("error");
+    })
+    
+},[Too]  - won't write here , since the new data is set with (settodo), so as per the usestae , count initial chanes ,a nd hit a loop
+
+
+
+🔁 Infinite Loop Explained Step-by-Step
+
+Component renders first time
+
+useEffect runs → API fetch
+
+SetTOo(data) updates Too
+
+React re-renders component
+
+React checks dependency [Too]
+
+Old Too !== New Too (array reference changed)
+
+➡ React runs useEffect AGAIN
+➡ Fetch again → SetToo again
+➡ Re-render → Dependency changed again
+♾ LOOP FOREVER
