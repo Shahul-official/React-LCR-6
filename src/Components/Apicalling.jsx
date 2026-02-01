@@ -71,3 +71,17 @@ export default Apicalling
 // return
 //    ↓
 // STOP (useEffect doesn’t run again)
+
+
+
+
+
+// That’s the core idea.
+
+// todo = value stored inside React
+
+// settodo(newValue) = tells React to replace stored value
+
+// React re-renders component
+
+// On next render, todo gets the updated stored value
