@@ -76,7 +76,7 @@ export default Apicalling
 
 
 
-// That’s the core idea.
+// The core idea.
 
 // todo = value stored inside React
 
